@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tp_2/Screens/ActivitiesScreen.dart';
+import 'package:tp_2/Screens/ProfileScreen.dart';
 
 class HomeScreen extends StatefulWidget {
+  final Function(bool) updateLoginStatus;
+
+  const HomeScreen(this.updateLoginStatus, {Key? key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -22,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         page = Placeholder(color: Colors.green);
         break;
       case 2:
-        page = Placeholder(color: Colors.red);
+        page = ProfileScreen(widget.updateLoginStatus);
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');

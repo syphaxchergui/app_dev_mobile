@@ -1,8 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tp_2/Screens/HomeScreen.dart';
 import 'package:tp_2/Screens/LoginScreen.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -14,9 +19,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isLoggedIn = true;
+  bool isLoggedIn = false;
 
   void updateLoginStatus(bool status) {
+    print('Updating login status to: $status');
     setState(() {
       isLoggedIn = status;
     });
@@ -30,7 +36,9 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
         useMaterial3: true,
       ),
-      home: isLoggedIn ? HomeScreen() : LoginPage(updateLoginStatus),
+      home: isLoggedIn
+          ? HomeScreen(updateLoginStatus)
+          : LoginPage(updateLoginStatus),
     );
   }
 }
