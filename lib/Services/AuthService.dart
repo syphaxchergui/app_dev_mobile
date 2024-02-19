@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tp_2/DTOs/Activity.dart';
 import 'package:tp_2/DTOs/User.dart';
 
 class AuthService {
@@ -29,6 +30,11 @@ class AuthService {
           birthday: userDocument['birthday'].toDate(),
           postalCode: userDocument['postalCode'],
           city: userDocument['city'],
+          cart: userDocument['cart'] != null
+              ? (userDocument['cart'] as List<dynamic>)
+                  .map((activity) => Activity.fromJson(activity))
+                  .toList()
+              : [],
         );
 
         // Return the authenticated user
@@ -59,5 +65,35 @@ class AuthService {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  updateCart(List<Activity> newCart) async {
+    try {
+      List<Map<String, dynamic>> cartJson =
+          newCart.map((activity) => activity.toJson()).toList();
+      await _firestore.collection('users').doc(currentUser?.id).update({
+        'cart': cartJson,
+      });
+      currentUser?.cart = newCart;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  addToCart(Activity activity) async {
+    try {
+      Map<String, dynamic> activityMap = activity.toJson();
+
+      currentUser?.cart = [...?currentUser?.cart, activity];
+      await _firestore.collection('users').doc(currentUser?.id).update({
+        'cart': FieldValue.arrayUnion([activityMap]),
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  isActivityInCart(Activity activity) {
+    return currentUser?.cart.contains(activity) ?? false;
   }
 }

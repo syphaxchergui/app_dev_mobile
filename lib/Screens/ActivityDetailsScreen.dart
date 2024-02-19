@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tp_2/DTOs/Activity.dart';
+import 'package:tp_2/Services/AuthService.dart';
 
 class ActivityDetailScreen extends StatelessWidget {
   final Activity activity;
@@ -8,6 +9,8 @@ class ActivityDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isInCart = AuthService.currentUser!.cart.contains(activity);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Détails de l\'Activité'),
@@ -56,10 +59,10 @@ class ActivityDetailScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {
-                      _addToCart(activity, context);
-                    },
-                    child: Text('Ajouter au panier'),
+                    onPressed:
+                        isInCart ? null : () => _addToCart(activity, context),
+                    child:
+                        Text(isInCart ? 'Déjà ajoutée' : 'Ajouter au panier'),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 16),
                       minimumSize: const Size(double.infinity, 50),
@@ -79,6 +82,7 @@ class ActivityDetailScreen extends StatelessWidget {
 
   void _addToCart(Activity activity, BuildContext context) {
     print('Activité ajoutée au panier : ${activity.title}');
+    AuthService().addToCart(activity);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Activité ajoutée au panier : ${activity.title}'),
@@ -90,5 +94,7 @@ class ActivityDetailScreen extends StatelessWidget {
         duration: Duration(seconds: 2),
       ),
     );
+
+    Navigator.pop(context);
   }
 }

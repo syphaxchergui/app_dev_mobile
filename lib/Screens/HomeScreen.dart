@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tp_2/Screens/ActivitiesScreen.dart';
+import 'package:tp_2/Screens/CartScreen.dart';
 import 'package:tp_2/Screens/ProfileScreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         page = ActivitiesListScreen();
         break;
       case 1:
-        page = Placeholder(color: Colors.green);
+        page = CartScreen();
         break;
       case 2:
         page = ProfileScreen(widget.updateLoginStatus);
