@@ -44,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
             label: 'Activités',
-            // Customizing the "Activities" item
             activeIcon: Icon(Icons.list, color: Colors.blue),
           ),
           BottomNavigationBarItem(
