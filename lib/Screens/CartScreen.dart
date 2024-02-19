@@ -68,7 +68,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   trailing: IconButton(
-                    icon: Icon(Icons.remove_shopping_cart),
+                    icon: Icon(Icons.close),
                     onPressed: () {
                       _removeFromCart(index);
                     },

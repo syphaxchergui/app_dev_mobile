@@ -26,6 +26,7 @@ class AuthService {
         currentUser = User(
           id: userDocument.id,
           username: userDocument['username'],
+          password: userDocument['password'],
           address: userDocument['address'],
           birthday: userDocument['birthday'].toDate(),
           postalCode: userDocument['postalCode'],
@@ -57,6 +58,7 @@ class AuthService {
     try {
       await _firestore.collection('users').doc(user.id).update({
         'address': user.address,
+        'password': user.password,
         'postalCode': user.postalCode,
         'city': user.city,
         'birthday': user.birthday,

@@ -15,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late TextEditingController _addressController;
+  late TextEditingController _passwordController;
   late TextEditingController _postalCodeController;
   late TextEditingController _cityController;
   late DateTime _selectedDate;
@@ -27,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _postalCodeController =
         TextEditingController(text: currentUser.postalCode.toString());
     _cityController = TextEditingController(text: currentUser.city);
+    _passwordController = TextEditingController(text: currentUser.password);
     _selectedDate = currentUser.birthday; // Initialize selected date
   }
 
@@ -48,8 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 16),
             TextFormField(
-              readOnly: true,
-              initialValue: '********',
+              controller: _passwordController,
+              obscureText: true,
               decoration: InputDecoration(labelText: 'Password'),
             ),
             SizedBox(height: 16),
@@ -95,6 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     currentUser.postalCode = _postalCodeController.text;
                     currentUser.city = _cityController.text;
                     currentUser.birthday = _selectedDate;
+                    currentUser.password = _passwordController.text;
 
                     AuthService authService = AuthService();
 

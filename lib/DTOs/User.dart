@@ -3,6 +3,7 @@ import 'package:tp_2/DTOs/Activity.dart';
 class User {
   final String id;
   final String username;
+  String password;
   String address;
   DateTime birthday;
   String postalCode;
@@ -12,6 +13,7 @@ class User {
   User({
     required this.id,
     required this.username,
+    required this.password,
     required this.address,
     required this.birthday,
     required this.postalCode,
