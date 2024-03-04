@@ -1,8 +1,8 @@
 import 'package:tp_2/DTOs/Activity.dart';
 
 class User {
-  final String id;
-  final String username;
+  String id;
+  String username;
   String password;
   String address;
   DateTime birthday;

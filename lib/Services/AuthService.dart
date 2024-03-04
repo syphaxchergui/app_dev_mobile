@@ -50,6 +50,47 @@ class AuthService {
     }
   }
 
+  Future<User?> signUp(String username, String password) async {
+    try {
+      // Check if the username is already taken
+      QuerySnapshot existingUser = await _firestore
+          .collection('users')
+          .where('username', isEqualTo: username)
+          .get();
+
+      if (existingUser.docs.isNotEmpty) {
+        // Username already exists
+        return null;
+      } else {
+        // Create a new user document in Firestore
+        DocumentReference newUserRef =
+            await _firestore.collection('users').add({
+          'username': username,
+          'password': password,
+          'address': '',
+          'birthday': DateTime.now(),
+          'postalCode': '',
+          'city': '',
+          'cart': [],
+        });
+        User newUser = User(
+            password: password,
+            username: username,
+            id: newUserRef.id,
+            address: '',
+            birthday: DateTime.now(),
+            postalCode: '',
+            city: '',
+            cart: []);
+        currentUser = newUser;
+        return currentUser;
+      }
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   static logout() {
     currentUser = null;
   }

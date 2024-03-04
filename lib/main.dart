@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tp_2/Screens/HomeScreen.dart';
 import 'package:tp_2/Screens/LoginScreen.dart';
+import 'package:tp_2/Screens/SignupScreen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,11 +21,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isLoggedIn = false;
+  bool isInscriptionPage = false;
 
   void updateLoginStatus(bool status) {
     print('Updating login status to: $status');
     setState(() {
       isLoggedIn = status;
+      isInscriptionPage = false;
+    });
+  }
+
+  void updateInscriptionPage(bool status) {
+    print('Updating inscription page status to: $status');
+    setState(() {
+      isInscriptionPage = status;
     });
   }
 
@@ -38,7 +48,9 @@ class _MyAppState extends State<MyApp> {
       ),
       home: isLoggedIn
           ? HomeScreen(updateLoginStatus)
-          : LoginPage(updateLoginStatus),
+          : isInscriptionPage
+              ? SignUpPage(updateLoginStatus, updateInscriptionPage)
+              : LoginPage(updateLoginStatus, updateInscriptionPage),
     );
   }
 }
