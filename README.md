@@ -24,5 +24,5 @@ Le MVP inclut les cinq USs fondamentales ainsi que deux fonctionnalités supplé
 - [x] US#4: [MVP] Panier
 - [x] US#5: [MVP] Profil Utilisateur
 - [x] US#6: Filtrage de la Liste des Activités
-- [x] US#7: Création de Compte
-- [x] US#8: Si une activite est ajoutee au panier marque comme (Deja ajoute et diasable le button). Panier vide.
+- [x] US#7: Création de Compte avec vérification de l'existence du nom d'utilisateur.
+- [x] US#8: Si une activité est ajoutée au panier, elle est marquée comme "Déjà ajoutée" et le bouton est désactivé Affichage d'un message si le panier est vide.
