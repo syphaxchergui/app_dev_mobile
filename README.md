@@ -1,6 +1,6 @@
 # Application d'Activités
 
-Une application dédiée à la planification et à la réalisation d'activités de groupe.
+MVP d'une application dédiée à la planification et à la réalisation d'activités de groupe.
 
 ## Identifiants de Connexion
 
