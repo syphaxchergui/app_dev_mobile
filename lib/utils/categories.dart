@@ -1,5 +1,5 @@
 List<String> categories = [
-  'Tous',
+  'Toutes',
   'Sport',
   'Food',
   'Travel',

@@ -2,6 +2,10 @@
 
 MVP d'une application dédiée à la planification et à la réalisation d'activités de groupe.
 
+## Plateforme utilisée pour tester
+
+`Chrome`
+
 ## Identifiants de Connexion
 
 ### Utilisateur 1

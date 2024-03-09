@@ -12,7 +12,7 @@ class ActivitiesListScreen extends StatefulWidget {
 class _ActivitiesListScreenState extends State<ActivitiesListScreen>
     with SingleTickerProviderStateMixin {
   late Future<List<Activity>> _activitiesFuture;
-  String _selectedCategory = 'Tous';
+  String _selectedCategory = 'Toutes';
   late TabController _tabController;
 
   @override
@@ -63,7 +63,7 @@ class _ActivitiesListScreenState extends State<ActivitiesListScreen>
               } else {
                 List<Activity> activities = snapshot.data ?? [];
                 // Filter activities based on selected category
-                if (_selectedCategory != 'Tous') {
+                if (_selectedCategory != 'Toutes') {
                   activities = activities
                       .where((a) => a.category == _selectedCategory)
                       .toList();
